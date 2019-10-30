@@ -41,6 +41,7 @@ public class MAAnimatedMultiGearView: MAMultiGearView {
     //MARK: Various methods
     
     /// Override of the `addLinkedGear` method in order to update the array of rotational angle when a gear is added
+    @discardableResult
     override public func addLinkedGear(_ gearLinked: Int, nbTeeth:UInt, color:UIColor, angleInDegree:Double, gearStyle:MASingleGearView.MAGearStyle = .Normal, nbBranches:UInt = 5) -> Bool {
         
         if !super.addLinkedGear(gearLinked, nbTeeth: nbTeeth, color: color, angleInDegree: angleInDegree, gearStyle: gearStyle, nbBranches: nbBranches) {

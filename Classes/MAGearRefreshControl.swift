@@ -104,7 +104,7 @@ public class MAGearRefreshControl: MAAnimatedMultiGearView {
             
             var offset = max(scrollView.contentOffset.y * -1, 0)
             offset = min(offset, 60)
-            scrollView.contentInset = UIEdgeInsetsMake(offset, 0, 0, 0)
+            scrollView.contentInset = UIEdgeInsets(top: offset, left: 0, bottom: 0, right: 0)
             
         } else {
             if (scrollView.isDragging) {
@@ -163,7 +163,7 @@ public class MAGearRefreshControl: MAAnimatedMultiGearView {
             
             UIView.animate(withDuration: 0.2, animations: { () -> Void in
                
-                scrollView.contentInset = UIEdgeInsetsMake(60, 0, 0, 0)
+                scrollView.contentInset = UIEdgeInsets(top: 60, left: 0, bottom: 0, right: 0)
                 scrollView.contentOffset = contentOffset;          // Workaround for smooth transition on iOS8
                 }, completion: { (completed) -> Void in
                     NSLog("completed")
@@ -216,7 +216,7 @@ public class MAGearRefreshControl: MAAnimatedMultiGearView {
                     self.arrayViews[0].transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
                 })
                 UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveLinear, animations: { () -> Void in
-                    scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+                    scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
                     scrollView.contentOffset = CGPoint(x: 0, y: 0);          // Workaround for smooth transition on iOS8
                     }, completion: { (finished) -> Void in
                         self.stopRotation = true

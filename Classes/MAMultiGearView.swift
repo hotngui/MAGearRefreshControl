@@ -92,7 +92,8 @@ public class MAMultiGearView : UIView {
     /// - parameter radius: Radius in pixel of the gear
     ///
     /// - returns: true if the gear was succesfully created, false otherwise (if at least one gear exists).
-    public func addInitialGear(nbTeeth:UInt, color: UIColor, radius:CGFloat) -> Bool {
+    @discardableResult
+    public func addInitialGear(nbTeeth: UInt, color: UIColor, radius: CGFloat, offset: CGPoint? = nil) -> Bool {
         
         if arrayViews.count > 0  {
             return false
@@ -104,14 +105,22 @@ public class MAMultiGearView : UIView {
         
         let view = MASingleGearView(gear: gear, gearColor:color)
         view.phase = 0
-        
-        view.center = CGPoint(x: self.bounds.size.width/2, y: self.bounds.size.height/2)
+
+        var centerPt = CGPoint(x: self.bounds.size.width/2, y: self.bounds.size.height/2)
+
+        if let offset = offset {
+            centerPt.x += offset.x
+            centerPt.y += offset.y
+        }
+
+        view.center = centerPt
         
         arrayViews.append(view)
         self.insertSubview(view, belowSubview: leftBorderView)
         
         return true
     }
+
     /// Add another gear to the view and link it to another already existing gear
     ///
     /// - parameter gearLinked: Index of the previously created gear
@@ -122,6 +131,7 @@ public class MAMultiGearView : UIView {
     /// - parameter nbBranches: Number of branches if the gear style is 'WithBranches'
     ///
     /// - returns: true if the gear was succesfully created, false otherwise (if the gearLinked index is incorrect).
+    @discardableResult
     public func addLinkedGear(_ gearLinked: Int, nbTeeth:UInt, color:UIColor, angleInDegree:Double, gearStyle:MASingleGearView.MAGearStyle = .Normal, nbBranches:UInt = 5) -> Bool {
         
         if gearLinked >= arrayViews.count || gearLinked < 0 {
